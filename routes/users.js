@@ -23,10 +23,10 @@ router.get("/", (req, res, next) => {
 
 });
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id/:pass", (req, res, next) => {
 
     const id = req.params.id;
-    const obj = req.body;
+    const pass = req.query.pass;
 
     db.getConnection((error, con) => {
         if (error)
@@ -34,7 +34,7 @@ router.get("/:id", (req, res, next) => {
 
         con.query(
             "SELECT * FROM User WHERE email = ? AND password = ?",
-            [id, obj.password],
+            [id, pass],
             (error, result, field) => {
                 con.release();
 
