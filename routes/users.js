@@ -42,7 +42,7 @@ router.get("/:id/:pass", (req, res, next) => {
                     return res.status(500).send({ error: error });
 
                 if (result == 0)
-                    return res.status(404).send({ mensage: 'Não encontrado.' });
+                    return res.status(404).send({ mensage: 'Não encontrado.', email: id, pass: pass, result: result });
 
                 res.status(200).send({ user: result });
             }
