@@ -26,14 +26,15 @@ router.get("/", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
 
     const id = req.params.id;
+    const obj = req.body;
 
     db.getConnection((error, con) => {
         if (error)
             return res.status(500).send({ error: error });
 
         con.query(
-            "SELECT * FROM User WHERE email = ?",
-            [id],
+            "SELECT * FROM User WHERE email = ? AND password = ?",
+            [id, obj.password],
             (error, result, field) => {
                 con.release();
 
