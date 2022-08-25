@@ -1,0 +1,28 @@
+{
+  "name": "astro-server",
+  "version": "1.0.0",
+  "description": "Astro Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "astro",
+    "recrutamento",
+    "server"
+  ],
+  "author": "Leonardo Tosin",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "prettier": "2.7.1"
+  }
+}
