@@ -8,7 +8,7 @@ router.get("/", (req, res, next) => {
         if (error)
             return res.status(500).send({ error: error });
 
-        con.query("SELECT * FROM User", (error, result, field) => {
+        con.query("SELECT email, picture, name, curJob, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio FROM User", (error, result, field) => {
             con.release();
 
             if (error)
@@ -33,7 +33,7 @@ router.get("/:id", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            "SELECT * FROM User WHERE email = ? AND password = ?",
+            "SELECT email, picture, name, curJob, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio FROM User WHERE email = ? AND password = ?",
             [id, pass],
             (error, result, field) => {
                 con.release();
@@ -60,8 +60,8 @@ router.post("/", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            `INSERT INTO User (email, password, picture, name, curJob, phone, summary, hasCollege, salaryClt, salaryPj, linkedin, github, portfolio) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO User (email, password, picture, name, curJob, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 obj.email,
                 obj.password,
@@ -70,7 +70,10 @@ router.post("/", (req, res, next) => {
                 obj.curJob,
                 obj.phone,
                 obj.summary,
-                obj.hasCollege,
+                obj.available,
+                obj.education,
+                obj.expectedClt,
+                obj.expectedPj,
                 obj.salaryClt,
                 obj.salaryPj,
                 obj.linkedin,
@@ -106,7 +109,10 @@ router.patch("/:id", (req, res, next) => {
                     curJob = ?, 
                     phone = ?, 
                     summary = ?, 
-                    hasCollege = ?, 
+                    available = ?, 
+                    education = ?,
+                    expectedClt = ?, 
+                    expectedPj = ?, 
                     salaryClt = ?, 
                     salaryPj = ?, 
                     linkedin = ?, 
@@ -119,7 +125,10 @@ router.patch("/:id", (req, res, next) => {
                 obj.curJob,
                 obj.phone,
                 obj.summary,
-                obj.hasCollege,
+                obj.available,
+                obj.education,
+                obj.expectedClt,
+                obj.expectedPj,
                 obj.salaryClt,
                 obj.salaryPj,
                 obj.linkedin,
