@@ -62,10 +62,11 @@ router.post("/", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            `INSERT INTO Test (name, about, type, time) 
+            `INSERT INTO Test (name, picture, about, type, time) 
             VALUES (?, ?, ?, ?)`,
             [
                 obj.name,
+                obj.picture,
                 obj.about,
                 obj.type,
                 obj.time
@@ -131,12 +132,14 @@ router.patch("/:id", (req, res, next) => {
         con.query(
             `UPDATE Test 
                 SET name = ?, 
+                    picture = ?,
                     about = ?, 
                     type = ?, 
                     time = ?
               WHERE id = ?`,
             [
                 obj.name,
+                obj.picture,
                 obj.about,
                 obj.type,
                 obj.time,
