@@ -33,7 +33,7 @@ router.get("/:id", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            "SELECT email, picture, name, curJob, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio FROM User WHERE email = ? AND password = ?",
+            "SELECT email, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio FROM User WHERE email = ? AND password = ?",
             [id, pass],
             (error, result, field) => {
                 con.release();
@@ -60,7 +60,7 @@ router.post("/", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            `INSERT INTO User (email, password, picture, name, curJob, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio) 
+            `INSERT INTO User (email, password, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 obj.email,
@@ -68,6 +68,7 @@ router.post("/", (req, res, next) => {
                 obj.picture,
                 obj.name,
                 obj.curJob,
+                obj.address,
                 obj.phone,
                 obj.summary,
                 obj.available,
@@ -107,6 +108,7 @@ router.patch("/:id", (req, res, next) => {
                 SET picture = ?, 
                     name = ?, 
                     curJob = ?, 
+                    address = ?,
                     phone = ?, 
                     summary = ?, 
                     available = ?, 
@@ -123,6 +125,7 @@ router.patch("/:id", (req, res, next) => {
                 obj.picture,
                 obj.name,
                 obj.curJob,
+                obj.address,
                 obj.phone,
                 obj.summary,
                 obj.available,
