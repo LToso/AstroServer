@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const url = require("url");
 
 const usersRoute = require("./routes/users");
+const testsRoute = require("./routes/tests");
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
 
 //Rotas
 app.use("/user", usersRoute);
+app.use("/tests", testsRoute);
 
 //Erro API
 app.use((req, res, next) => {
