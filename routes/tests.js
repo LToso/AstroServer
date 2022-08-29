@@ -164,7 +164,25 @@ router.delete("/:id", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            " DELETE FROM TestQuestion WHERE testId = ? ; DELETE FROM Test WHERE id = ?",
+            "DELETE FROM TestQuestion WHERE testId = ?",
+            [id, id],
+            (error, result, field) => {
+                con.release();
+
+                if (error)
+                    return res.status(500).send({ error: error });
+
+                res.status(202).send({ message: "Removido com sucesso." });
+            }
+        );
+    });
+
+    db.getConnection((error, con) => {
+        if (error)
+            return res.status(500).send({ error: error });
+
+        con.query(
+            "DELETE FROM Test WHERE id = ?",
             [id, id],
             (error, result, field) => {
                 con.release();
