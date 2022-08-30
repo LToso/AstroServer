@@ -38,7 +38,7 @@ router.post("/", (req, res, next) => {
 
         con.query(
             `INSERT INTO UserTest (userEmail, testId, score, date) VALUES (?, ?, ?, ?)`,
-            [obj.email, obj.test, obj.score, obj.date],
+            [obj.userEmail, obj.testId, obj.score, obj.date],
             (error, result, field) => {
                 con.release();
 
@@ -70,7 +70,7 @@ router.patch("/:id", (req, res, next) => {
                 obj.score,
                 obj.date,
                 id,
-                obj.test,
+                obj.testId,
             ],
             (error, result, field) => {
                 con.release();
