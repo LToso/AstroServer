@@ -21,7 +21,7 @@ router.get("/:id", (req, res, next) => {
                 if (result == 0)
                     return res.status(404).send({ mensage: 'Não encontrado.', result: result });
 
-                res.status(200).send({ user: result });
+                res.status(200).send({ list: result });
             }
         );
     });
