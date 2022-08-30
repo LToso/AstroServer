@@ -6,6 +6,7 @@ const url = require("url");
 
 const usersRoute = require("./routes/users");
 const testsRoute = require("./routes/tests");
+const usersTestRoute = require("./routes/usersTest");
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 //Rotas
 app.use("/user", usersRoute);
 app.use("/tests", testsRoute);
+app.use("/usersTest", usersTestRoute);
 
 //Erro API
 app.use((req, res, next) => {
