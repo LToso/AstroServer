@@ -29,8 +29,8 @@ app.use((req, res, next) => {
 
 //Rotas
 app.use("/user", usersRoute);
-app.use("/tests", testsRoute);
-app.use("/usersTest", usersTestRoute);
+app.use("/test", testsRoute);
+app.use("/usertest", usersTestRoute);
 
 //Erro API
 app.use((req, res, next) => {
