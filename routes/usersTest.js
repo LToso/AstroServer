@@ -63,15 +63,14 @@ router.patch("/:id", (req, res, next) => {
 
         con.query(
             `UPDATE UserTest 
-                SET testId = ?, 
-                    score = ?, 
+                SET score = ?, 
                     date = ?
-              WHERE userEmail = ?`,
-            [
-                obj.test,
+              WHERE userEmail = ? AND testId = ?`,
+            [                
                 obj.score,
                 obj.date,
                 id,
+                obj.test,
             ],
             (error, result, field) => {
                 con.release();
