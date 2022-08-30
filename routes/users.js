@@ -61,7 +61,7 @@ router.post("/", (req, res, next) => {
 
         con.query(
             `INSERT INTO User (email, password, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 obj.email,
                 obj.password,
