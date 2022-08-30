@@ -11,8 +11,7 @@ router.get("/:id", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            "SELECT * FROM UserTest WHERE userEmail = ?",
-            [id],
+            "SELECT * FROM UserTest WHERE userEmail = ?", [id],
             (error, result, field) => {
                 con.release();
 
@@ -20,7 +19,7 @@ router.get("/:id", (req, res, next) => {
                     return res.status(500).send({ error: error });
 
                 if (result == 0)
-                    return res.status(404).send({ mensage: 'Não encontrado.', email: id, pass: pass, result: result });
+                    return res.status(404).send({ mensage: 'Não encontrado.', result: result });
 
                 res.status(200).send({ user: result });
             }
@@ -38,21 +37,15 @@ router.post("/", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            `INSERT INTO UserTest (userEmail, testId, score, date) 
-            VALUES (?, ?, ?, ?)`,
-            [
-                obj.email,
-                obj.test,
-                obj.score,
-                obj.date,
-            ],
+            `INSERT INTO UserTest (userEmail, testId, score, date) VALUES (?, ?, ?, ?)`,
+            [obj.email, obj.test, obj.score, obj.date],
             (error, result, field) => {
                 con.release();
 
                 if (error)
                     return res.status(500).send({ error: error });
 
-                res.status(201).send({ message: "Cadastrado com sucesso.", id: result.email });
+                res.status(201).send({ message: "Cadastrado com sucesso." });
             }
         );
     });
@@ -86,7 +79,7 @@ router.patch("/:id", (req, res, next) => {
                 if (error)
                     return res.status(500).send({ error: error });
 
-                res.status(202).send({ message: "Alterado com sucesso.", id: result.email });
+                res.status(202).send({ message: "Alterado com sucesso." });
             }
         );
     });
@@ -110,7 +103,7 @@ router.delete("/:id", (req, res, next) => {
                 if (error)
                     return res.status(500).send({ error: error });
 
-                res.status(202).send({ message: "Removido com sucesso.", id: result.email });
+                res.status(202).send({ message: "Removido com sucesso." });
             }
         );
     });
