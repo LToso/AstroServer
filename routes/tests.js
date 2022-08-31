@@ -77,8 +77,7 @@ router.post("/", (req, res, next) => {
                 if (error)
                     return res.status(500).send({ error: error });
 
-
-                res.status(201).send({ message: "Cadastrado com sucesso." });
+                res.status(201).send({ message: "Cadastrado com sucesso.", result: result });
             }
         );
     });
