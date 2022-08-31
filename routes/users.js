@@ -8,7 +8,7 @@ router.get("/", (req, res, next) => {
         if (error)
             return res.status(500).send({ error: error });
 
-        con.query("SELECT email, picture, name, curJob, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio FROM User", (error, result, field) => {
+        con.query("SELECT email, picture, name, curJob, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio, company FROM User", (error, result, field) => {
             con.release();
 
             if (error)
@@ -33,7 +33,7 @@ router.get("/:id", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            "SELECT email, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio, administrator FROM User WHERE email = ? AND password = ?",
+            "SELECT email, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio, administrator, company FROM User WHERE email = ? AND password = ?",
             [id, pass],
             (error, result, field) => {
                 con.release();
@@ -60,7 +60,7 @@ router.post("/", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            `INSERT INTO User (email, password, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio) 
+            `INSERT INTO User (email, password, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio, company) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 obj.email,
@@ -80,6 +80,7 @@ router.post("/", (req, res, next) => {
                 obj.linkedin,
                 obj.github,
                 obj.portfolio,
+                obj.company
             ],
             (error, result, field) => {
                 con.release();
@@ -119,7 +120,8 @@ router.patch("/:id", (req, res, next) => {
                     salaryPj = ?, 
                     linkedin = ?, 
                     github = ?, 
-                    portfolio = ? 
+                    portfolio = ?,
+                    company = ?
               WHERE email = ?`,
             [
                 obj.picture,
@@ -137,6 +139,7 @@ router.patch("/:id", (req, res, next) => {
                 obj.linkedin,
                 obj.github,
                 obj.portfolio,
+                obj.company,
                 id,
             ],
             (error, result, field) => {
@@ -146,30 +149,6 @@ router.patch("/:id", (req, res, next) => {
                     return res.status(500).send({ error: error });
 
                 res.status(202).send({ message: "Alterado com sucesso.", id: result.email });
-            }
-        );
-    });
-
-});
-
-router.delete("/:id", (req, res, next) => {
-
-    const id = req.params.id;
-
-    db.getConnection((error, con) => {
-        if (error)
-            return res.status(500).send({ error: error });
-
-        con.query(
-            " DELETE FROM User WHERE email = ?",
-            [id],
-            (error, result, field) => {
-                con.release();
-
-                if (error)
-                    return res.status(500).send({ error: error });
-
-                res.status(202).send({ message: "Removido com sucesso.", id: result.email });
             }
         );
     });
