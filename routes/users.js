@@ -33,7 +33,7 @@ router.get("/:id", (req, res, next) => {
             return res.status(500).send({ error: error });
 
         con.query(
-            "SELECT email, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio FROM User WHERE email = ? AND password = ?",
+            "SELECT email, picture, name, curJob, address, phone, summary, available, education, expectedClt, expectedPj, salaryClt, salaryPj, linkedin, github, portfolio, administrator FROM User WHERE email = ? AND password = ?",
             [id, pass],
             (error, result, field) => {
                 con.release();
