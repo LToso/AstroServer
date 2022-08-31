@@ -66,7 +66,7 @@ router.patch("/:id", (req, res, next) => {
                 SET score = ?, 
                     date = ?
               WHERE userEmail = ? AND testId = ?`,
-            [                
+            [
                 obj.score,
                 obj.date,
                 id,

@@ -63,7 +63,7 @@ router.post("/", (req, res, next) => {
 
         con.query(
             `INSERT INTO Test (name, picture, about, type, time) 
-            VALUES (?, ?, ?, ?)`,
+            VALUES (?, ?, ?, ?, ?)`,
             [
                 obj.name,
                 obj.picture,
