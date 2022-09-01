@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 app.use("/user", userRoute);
 app.use("/test", testRoute);
 app.use("/usertest", userTestRoute);
-app.use("/userPremium", userPremiumRoute);
+app.use("/userpremium", userPremiumRoute);
 
 //Erro API
 app.use((req, res, next) => {
