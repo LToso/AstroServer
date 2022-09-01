@@ -80,7 +80,7 @@ router.post("/", (req, res, next) => {
                 obj.linkedin,
                 obj.github,
                 obj.portfolio,
-                obj.company
+                obj.company,
             ],
             (error, result, field) => {
                 con.release();

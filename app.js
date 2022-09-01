@@ -4,9 +4,10 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const url = require("url");
 
-const usersRoute = require("./routes/users");
-const testsRoute = require("./routes/tests");
-const usersTestRoute = require("./routes/usersTest");
+const userRoute = require("./routes/user");
+const testRoute = require("./routes/test");
+const userTestRoute = require("./routes/userTest");
+const userPremiumRoute = require("./routes/userPremium");
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,9 +26,10 @@ app.use((req, res, next) => {
 });
 
 //Rotas
-app.use("/user", usersRoute);
-app.use("/test", testsRoute);
-app.use("/usertest", usersTestRoute);
+app.use("/user", userRoute);
+app.use("/test", testRoute);
+app.use("/usertest", userTestRoute);
+app.use("/userPremium", userPremiumRoute);
 
 //Erro API
 app.use((req, res, next) => {
