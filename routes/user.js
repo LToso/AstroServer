@@ -4,14 +4,23 @@ const db = require("../db_connection");
 
 //Get All
 router.get("/", async (req, res) => {
+
+    var page = req.params.page;
+    var lines = 5;
+
+    if (!page || page < 1)
+        page = 1;
+
+    page = page - 1
+
     try {
         var users = await db.run(`SELECT u.*, NULL as password, if(p.endDate >= UNIX_TIMESTAMP(NOW()), true, false) isPremium                          
                                  FROM User u 
-                                 LEFT JOIN UserPremium p ON u.email = p.userEmail`, []);
+                                 LEFT JOIN UserPremium p ON u.email = p.userEmail LIMIT ?, ?`, [page * lines, lines]);
         for (let i = 0; i < users.length; i++)
-            users[i].last = await db.run(`SELECT u.*, t.picture, t.name FROM UserTest u 
+            users[i].test = await db.run(`SELECT u.*, t.picture, t.name FROM UserTest u 
                                           INNER JOIN Test t ON u.testId = t.id 
-                                          WHERE userEmail = ? ORDER BY date DESC LIMIT 1`, [users[i].email]);
+                                          WHERE userEmail = ? ORDER BY date DESC`, [users[i].email]);
 
         res.status(200).send({ users })
     } catch (error) {
