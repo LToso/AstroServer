@@ -14,7 +14,7 @@ var run = (query, parameters) => {
       pool.getConnection((error, con) => {
         if (error)
           resolve(error);
-        con.query(query, parameters,
+        con.query(query, parameters,          
           (error, result) => {
             con.release();
             if (error)
