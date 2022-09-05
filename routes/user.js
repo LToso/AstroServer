@@ -17,12 +17,14 @@ router.get("/", async (req, res) => {
         var users = await db.run(`SELECT u.*, NULL as password, if(p.endDate >= UNIX_TIMESTAMP(NOW()), true, false) isPremium                          
                                  FROM User u 
                                  LEFT JOIN UserPremium p ON u.email = p.userEmail LIMIT ?, ?`, [page * lines, lines]);
+        var total = await db.run(`SELECT count(1) total
+                                 FROM User`, []);                                 
         for (let i = 0; i < users.length; i++)
             users[i].test = await db.run(`SELECT u.*, t.picture, t.name FROM UserTest u 
                                           INNER JOIN Test t ON u.testId = t.id 
                                           WHERE userEmail = ? ORDER BY date DESC`, [users[i].email]);
 
-        res.status(200).send({ users })
+        res.status(200).send({ users: users, total: total })
     } catch (error) {
         res.status(500).send({ error: error });
     }
