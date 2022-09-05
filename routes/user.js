@@ -6,7 +6,7 @@ const db = require("../db_connection");
 router.get("/", async (req, res) => {
 
     var page = req.params.page;
-    var lines = 5;
+    var lines = 10;
 
     if (!page || page < 1)
         page = 1;
