@@ -55,6 +55,16 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.put("/", async (req, res) => {
+    console.log(req.body)
+    try {
+        var user = await db.run(`UPDATE User SET picture = ? WHERE email = ?`, [req.body.picture, req.body.email]);
+        res.status(200).send({ id: user.insertId, code: user.code });
+    } catch (error) {
+        res.status(500).send({ error: error });
+    }
+});
+
 router.patch("/", async (req, res) => {
     try {
         var user = await db.run(`UPDATE User SET name = ?, curJob = ?, address = ?,

@@ -11,7 +11,7 @@ const userPremiumRoute = require("./routes/userPremium");
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' }));
 
 //CORS
 app.use((req, res, next) => {
